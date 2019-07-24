@@ -129,3 +129,32 @@ def solve_for_r(**letters):
     return str(result.quantize(TWOPLACES))
 
 
+def solve_for_t(**letters):
+    """Finds the number of years before the loan is paid off.
+
+    Note
+    ----
+    I is the total amount of interest paid off by the customer over the course of the loan.
+    P is the amount of money borrowed.
+    r is the annual interest rate.
+
+    Parameters
+    ----------
+    letters
+        Commands keyword arguments.
+
+    Returns
+    -------
+    str
+        The result of solving for t converted to a string.
+    """
+    p = letters["p"]
+    r = letters["r"]
+    i = letters["i"]
+    result = Decimal(i/((r/100)*p))
+
+    if (result == result.to_integral()):
+        return str(result.quantize(Decimal(1)))
+
+    return str(result.quantize(TWOPLACES))
+
