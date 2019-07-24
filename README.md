@@ -6,8 +6,12 @@
 
 ## Usage
 
+```bash
 python3 start.py
+```
 
 ## Testing
 
+```bash
 python3 test.py
+```
