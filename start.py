@@ -245,7 +245,7 @@ def main():
         print(
             "Please select a correct number with no more than 2 decimal places.\n")
         second_variable = input(
-            "Please now enter the first variable: ")
+            "Please now enter the second variable: ")
     # Convert variable into an integer or a float
     try:
         commands[second_letter] = int(second_variable)
@@ -262,7 +262,7 @@ def main():
         print(
             "Please select a correct number with no more than 2 decimal places.\n")
         third_variable = input(
-            "Please now enter the first variable: ")
+            "Please now enter the third variable: ")
     # Convert variable into an integer or a float
     try:
         commands[third_letter] = int(third_variable)
