@@ -2,8 +2,7 @@ import json
 
 
 def print_result(number_to_print):
-    """
-    Takes a string of numbers and prints the equivalent glyph.
+    """Takes a string of numbers and prints the equivalent glyph.
 
     Parameters
     ----------
@@ -23,8 +22,7 @@ def print_result(number_to_print):
 
 
 def print_glyphs(listOfLetters):
-    """
-    Prints into the screen the combination of a list of glyphs.
+    """Prints into the screen the combination of a list of glyphs.
 
     Parameters
     ----------
