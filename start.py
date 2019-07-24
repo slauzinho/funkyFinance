@@ -7,4 +7,6 @@ def main():
         data = json.load(outfile)
 
 
-main()
+
+def solve_for_i(p, r, t):
+    return "%.2f" % (p*(r/100)*t)
