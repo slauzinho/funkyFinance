@@ -4,7 +4,11 @@ import json
 def print_result(number_to_print):
     """
     Takes a string of numbers and prints the equivalent glyph.
-    :param number_to_print: Number to be printed into a glyph.
+
+    Parameters
+    ----------
+    number_to_print: str
+        Number to be printed into a glyph.
     """
     data = {}
     listOfLetters = []
@@ -21,7 +25,11 @@ def print_result(number_to_print):
 def print_glyphs(listOfLetters):
     """
     Prints into the screen the combination of a list of glyphs.
-    :param listOfLetters: List of glyphs to be printed
+
+    Parameters
+    ----------
+    listOfLetters: list(list(str))
+        List of glyphs to be printed.
     """
     for row in list(zip(*listOfLetters)):
         text = ""
