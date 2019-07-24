@@ -212,3 +212,66 @@ def is_valid_numeric(input):
         return False
 
 
+def main():
+    commands = {}
+
+    print("\n")
+    print("Welcome to Funky Finance!")
+
+    # Ask the user for the first letter and variable
+    first_letter = input(
+        "What sort of number is the first variable? (Please enter i, p, r or t): ")
+    first_variable = input(
+        "Please now enter the first variable: ")
+    # If the user fails to follow the format, we display an error message and try again
+    while not is_valid_numeric(first_variable):
+        print(
+            "Please select a correct number with no more than 2 decimal places.\n")
+        first_variable = input(
+            "Please now enter the first variable: ")
+    # Convert variable into an integer or a float
+    try:
+        commands[first_letter] = int(first_variable)
+    except ValueError:
+        commands[first_letter] = float(first_variable)
+
+    # Ask the user for the second letter and variable
+    second_letter = input(
+        "What sort of number is the second variable? (Please enter i, p, r or t): ")
+    second_variable = input(
+        "Please now enter the second variable: ")
+    # If the user fails to follow the format, we display an error message and try again
+    while not is_valid_numeric(second_variable):
+        print(
+            "Please select a correct number with no more than 2 decimal places.\n")
+        second_variable = input(
+            "Please now enter the first variable: ")
+    # Convert variable into an integer or a float
+    try:
+        commands[second_letter] = int(second_variable)
+    except ValueError:
+        commands[second_letter] = float(second_variable)
+
+    # Ask the user for the third letter and variable
+    third_letter = input(
+        "What sort of number is the third variable? (Please enter i, p, r or t): ")
+    third_variable = input(
+        "Please now enter the third variable: ")
+    # If the user fails to follow the format, we display an error message and try again
+    while not is_valid_numeric(third_variable):
+        print(
+            "Please select a correct number with no more than 2 decimal places.\n")
+        third_variable = input(
+            "Please now enter the first variable: ")
+    # Convert variable into an integer or a float
+    try:
+        commands[third_letter] = int(third_variable)
+    except ValueError:
+        commands[third_letter] = float(third_variable)
+
+    print_result(solve_equation(
+        [first_letter, second_letter, third_letter])(**commands))
+
+
+if __name__ == '__main__':
+    main()
