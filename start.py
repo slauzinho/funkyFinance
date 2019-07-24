@@ -99,3 +99,33 @@ def solve_for_p(**letters):
     return str(result.quantize(TWOPLACES))
 
 
+def solve_for_r(**letters):
+    """Finds the annual interest rate.
+
+    Note
+    ----
+    I is the total amount of interest paid off by the customer over the course of the loan.
+    P is the amount of money borrowed.
+    t is the number of years before the loan is paid off.
+
+    Parameters
+    ----------
+    letters
+        Commands keyword arguments.
+
+    Returns
+    -------
+    str
+        The result of solving for r converted to a string.
+    """
+    p = letters["p"]
+    i = letters["i"]
+    t = letters["t"]
+    result = Decimal((i/(p*t))*100)
+
+    if (result == result.to_integral()):
+        return str(result.quantize(Decimal(1)))
+
+    return str(result.quantize(TWOPLACES))
+
+
