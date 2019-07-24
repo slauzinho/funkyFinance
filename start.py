@@ -158,3 +158,33 @@ def solve_for_t(**letters):
 
     return str(result.quantize(TWOPLACES))
 
+
+def solve_equation(commands):
+    """Function that takes a list of commands and returns the correct solving function
+    that maps to those arguments.
+
+    Parameters
+    ----------
+    commands: list(str)
+        List of letters provided by the user.
+
+    Returns
+    -------
+    func
+        The corresponding solving function.
+    """
+    available_commands = ['i', 'r', 't', 'p']
+    # get the missing argument
+    my_command = list(set(available_commands) - set(commands))[0]
+
+    if my_command == 'i':
+        return solve_for_i
+
+    if my_command == 'p':
+        return solve_for_p
+
+    if my_command == 'r':
+        return solve_for_r
+
+    if my_command == 't':
+        return solve_for_t
