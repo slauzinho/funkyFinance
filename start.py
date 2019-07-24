@@ -7,15 +7,15 @@ def print_result(number_to_print):
     :param number_to_print: Number to be printed into a glyph.
     """
     data = {}
-    glyphList = []
+    listOfLetters = []
     with open("glyph.json") as outfile:
         data = json.load(outfile)
 
     for letter in number_to_print:
-        glyphList.append(data[letter].split("\n"))
-        glyphList.append(data[" "].split("\n"))
+        listOfLetters.append(data[letter].split("\n"))
+        listOfLetters.append(data[" "].split("\n"))
 
-    print_glyphs(glyphList)
+    print_glyphs(listOfLetters)
 
 
 def print_glyphs(listOfLetters):
