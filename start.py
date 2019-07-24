@@ -212,6 +212,11 @@ def is_valid_numeric(input):
         return False
 
 
+def is_valid_letter(input):
+    correct_arguments = ['r', 't', 'p', 'i']
+    return input in correct_arguments
+
+
 def main():
     commands = {}
 
@@ -221,6 +226,11 @@ def main():
     # Ask the user for the first letter and variable
     first_letter = input(
         "What sort of number is the first variable? (Please enter i, p, r or t): ")
+    while not is_valid_letter(first_letter):
+        print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
+        first_letter = input(
+            "What sort of number is the first variable? (Please enter i, p, r or t): ")
+
     first_variable = input(
         "Please now enter the first variable: ")
     # If the user fails to follow the format, we display an error message and try again
@@ -238,6 +248,11 @@ def main():
     # Ask the user for the second letter and variable
     second_letter = input(
         "What sort of number is the second variable? (Please enter i, p, r or t): ")
+    while not is_valid_letter(second_letter):
+        print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
+        second_letter = input(
+            "What sort of number is the second variable? (Please enter i, p, r or t): ")
+
     second_variable = input(
         "Please now enter the second variable: ")
     # If the user fails to follow the format, we display an error message and try again
@@ -255,6 +270,11 @@ def main():
     # Ask the user for the third letter and variable
     third_letter = input(
         "What sort of number is the third variable? (Please enter i, p, r or t): ")
+    while not is_valid_letter(third_letter):
+        print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
+        third_letter = input(
+            "What sort of number is the third variable? (Please enter i, p, r or t): ")
+
     third_variable = input(
         "Please now enter the third variable: ")
     # If the user fails to follow the format, we display an error message and try again
