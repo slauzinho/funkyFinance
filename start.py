@@ -1,4 +1,7 @@
 import json
+from decimal import Decimal
+
+TWOPLACES = Decimal(10) ** -2
 
 
 def print_result(number_to_print):
@@ -36,5 +39,63 @@ def print_glyphs(listOfLetters):
         print(text)
 
 
-def solve_for_i(p, r, t):
-    return "%.2f" % (p*(r/100)*t)
+def solve_for_i(**letters):
+    """Finds the total amount of interest paid off by the customer over the course of the loan.
+
+    Note
+    ----
+    P is the amount of money borrowed.
+    r is the annual interest rate.
+    t is the number of years before the loan is paid off.
+
+    Parameters
+    ----------
+    letters
+        Commands keyword arguments.
+
+    Returns
+    -------
+    str
+        The result of solving for I converted to a string.
+    """
+    p = letters["p"]
+    r = letters["r"]
+    t = letters["t"]
+    result = Decimal(p*(r/100)*t)
+
+    if (result == result.to_integral()):
+        return str(result.quantize(Decimal(1)))
+
+    return str(result.quantize(TWOPLACES))
+
+
+def solve_for_p(**letters):
+    """Finds the total amount of money borrowed.
+
+    Note
+    ----
+    I is the total amount of interest paid off by the customer over the course of the loan.
+    r is the annual interest rate.
+    t is the number of years before the loan is paid off.
+
+    Parameters
+    ----------
+    letters
+        Commands keyword arguments.
+
+    Returns
+    -------
+    str
+        The result of solving for p converted to a string.
+    """
+    i = letters["i"]
+    r = letters["r"]
+    t = letters["t"]
+    result = Decimal(i/((r/100)*t))
+
+    if (result == result.to_integral()):
+        return str(result.quantize(Decimal(1)))
+
+    return str(result.quantize(TWOPLACES))
+
+
