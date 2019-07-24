@@ -13,26 +13,26 @@ def print_result(number_to_print):
         Number to be printed into a glyph.
     """
     data = {}
-    listOfLetters = []
+    list_of_letters = []
     with open("glyph.json") as outfile:
         data = json.load(outfile)
 
     for letter in number_to_print:
-        listOfLetters.append(data[letter].split("\n"))
-        listOfLetters.append(data[" "].split("\n"))
+        list_of_letters.append(data[letter].split("\n"))
+        list_of_letters.append(data[" "].split("\n"))
 
-    print_glyphs(listOfLetters)
+    print_glyphs(list_of_letters)
 
 
-def print_glyphs(listOfLetters):
+def print_glyphs(list_of_letters):
     """Prints into the screen the combination of a list of glyphs.
 
     Parameters
     ----------
-    listOfLetters: list(list(str))
+    list_of_letters: list(list(str))
         List of glyphs to be printed.
     """
-    for row in list(zip(*listOfLetters)):
+    for row in list(zip(*list_of_letters)):
         text = ""
         for letter in row:
             text = text + letter
