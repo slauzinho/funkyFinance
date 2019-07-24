@@ -3,7 +3,7 @@ import start
 
 
 class TestFunkyFinance(unittest.TestCase):
-    def test_it_finds_i(self):
+    def test_it_finds_total_amout_interest_paid(self):
         arguments = {
             "p": 2000,
             "r": 1,
@@ -13,7 +13,7 @@ class TestFunkyFinance(unittest.TestCase):
         self.assertEqual(result, "200")
         self.assertNotEqual(result, 200)
 
-    def test_it_finds_t(self):
+    def test_it_finds_number_of_years_until_loan_is_paid(self):
         arguments = {
             "p": 2000,
             "r": 1,
@@ -23,7 +23,7 @@ class TestFunkyFinance(unittest.TestCase):
         self.assertEqual(result, "10")
         self.assertNotEqual(result, 10)
 
-    def test_it_finds_r(self):
+    def test_it_finds_interest_rate(self):
         arguments = {
             "p": 2000,
             "i": 200,
@@ -33,7 +33,7 @@ class TestFunkyFinance(unittest.TestCase):
         self.assertEqual(result, "1")
         self.assertNotEqual(result, 1)
 
-    def test_it_finds_p(self):
+    def test_it_finds_total_amount_borrowed(self):
         arguments = {
             "r": 1,
             "i": 200,
