@@ -188,3 +188,27 @@ def solve_equation(commands):
 
     if my_command == 't':
         return solve_for_t
+
+
+def is_valid_numeric(input):
+    """Checks if the input is valid.
+
+    Parameters
+    ----------
+    commands: str
+        String input that represents a number
+
+    Returns
+    -------
+    bool
+        True if the input is a number is less than 2 decimal places, False if not.
+    """
+    try:
+        if -2 <= Decimal(input).as_tuple().exponent <= 0:
+            return True
+        return False
+    # If we cant convert to decimal it means it's not a valid input
+    except:
+        return False
+
+
