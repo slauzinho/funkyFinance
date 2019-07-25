@@ -79,10 +79,10 @@ class TestFunkyFinance(unittest.TestCase):
         self.assertFalse(is_not_numeric)
 
     def test_it_is_correct_letter(self):
-        is_correct_letter = start.is_valid_letter("i")
+        is_correct_letter = start.is_valid_character("i")
         self.assertTrue(is_correct_letter)
 
-        is_incorrect_letter = start.is_valid_letter("z")
+        is_incorrect_letter = start.is_valid_character("z")
         self.assertFalse(is_incorrect_letter)
 
 
