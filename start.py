@@ -1,10 +1,11 @@
 import json
 from decimal import Decimal
+from typing import List, Dict, Callable
 
 TWOPLACES = Decimal(10) ** -2
 
 
-def print_result(number_to_print):
+def print_result(number_to_print: str) -> None:
     """Takes a string of numbers and prints the equivalent glyph.
 
     Parameters
@@ -12,10 +13,9 @@ def print_result(number_to_print):
     number_to_print: str
         Number to be printed into a glyph.
     """
-    data = {}
-    list_of_letters = []
+    list_of_letters: List[List[str]] = []
     with open("glyph.json") as outfile:
-        data = json.load(outfile)
+        data: Dict[str, str] = json.load(outfile)
 
     for letter in number_to_print:
         list_of_letters.append(data[letter].split("\n"))
@@ -24,7 +24,7 @@ def print_result(number_to_print):
     print_glyphs(list_of_letters)
 
 
-def print_glyphs(list_of_letters):
+def print_glyphs(list_of_letters: List[List[str]]) -> None:
     """Prints into the screen the combination of a list of glyphs.
 
     Parameters
@@ -39,7 +39,14 @@ def print_glyphs(list_of_letters):
         print(text)
 
 
-def solve_for_i(**letters):
+def convert_decimal_into_string(number_to_convert: Decimal) -> str:
+    if number_to_convert == number_to_convert.to_integral():
+        return str(number_to_convert.quantize(Decimal(1)))
+
+    return str(number_to_convert.quantize(TWOPLACES))
+
+
+def solve_for_i(p: float, r: float, t: float) -> str:
     """Finds the total amount of interest paid off by the customer over the course of the loan.
 
     Note
@@ -50,26 +57,21 @@ def solve_for_i(**letters):
 
     Parameters
     ----------
-    letters
-        Commands keyword arguments.
+    P is the amount of money borrowed.
+    r is the annual interest rate.
+    t is the number of years before the loan is paid off.
 
     Returns
     -------
     str
         The result of solving for I converted to a string.
     """
-    p = letters["p"]
-    r = letters["r"]
-    t = letters["t"]
     result = Decimal(p*(r/100)*t)
 
-    if (result == result.to_integral()):
-        return str(result.quantize(Decimal(1)))
-
-    return str(result.quantize(TWOPLACES))
+    return convert_decimal_into_string(result)
 
 
-def solve_for_p(**letters):
+def solve_for_p(i: float, r: float, t: float) -> str:
     """Finds the total amount of money borrowed.
 
     Note
@@ -80,26 +82,19 @@ def solve_for_p(**letters):
 
     Parameters
     ----------
-    letters
-        Commands keyword arguments.
+
 
     Returns
     -------
     str
         The result of solving for p converted to a string.
     """
-    i = letters["i"]
-    r = letters["r"]
-    t = letters["t"]
     result = Decimal(i/((r/100)*t))
 
-    if (result == result.to_integral()):
-        return str(result.quantize(Decimal(1)))
-
-    return str(result.quantize(TWOPLACES))
+    return convert_decimal_into_string(result)
 
 
-def solve_for_r(**letters):
+def solve_for_r(p: float, i: float, t: float) -> str:
     """Finds the annual interest rate.
 
     Note
@@ -110,26 +105,19 @@ def solve_for_r(**letters):
 
     Parameters
     ----------
-    letters
-        Commands keyword arguments.
+
 
     Returns
     -------
     str
         The result of solving for r converted to a string.
     """
-    p = letters["p"]
-    i = letters["i"]
-    t = letters["t"]
     result = Decimal((i/(p*t))*100)
 
-    if (result == result.to_integral()):
-        return str(result.quantize(Decimal(1)))
-
-    return str(result.quantize(TWOPLACES))
+    return convert_decimal_into_string(result)
 
 
-def solve_for_t(**letters):
+def solve_for_t(p: float, r: float, i: float) -> str:
     """Finds the number of years before the loan is paid off.
 
     Note
@@ -140,26 +128,19 @@ def solve_for_t(**letters):
 
     Parameters
     ----------
-    letters
-        Commands keyword arguments.
+
 
     Returns
     -------
     str
         The result of solving for t converted to a string.
     """
-    p = letters["p"]
-    r = letters["r"]
-    i = letters["i"]
     result = Decimal(i/((r/100)*p))
 
-    if (result == result.to_integral()):
-        return str(result.quantize(Decimal(1)))
-
-    return str(result.quantize(TWOPLACES))
+    return convert_decimal_into_string(result)
 
 
-def solve_equation(commands):
+def solve_equation(commands: List[str]) -> Callable[[float, float, float], str]:
     """Function that takes a list of commands and returns the correct solving function
     that maps to those arguments.
 
@@ -190,13 +171,12 @@ def solve_equation(commands):
         return solve_for_t
 
 
-def is_valid_numeric(input):
+def is_valid_numeric(number: str):
     """Checks if the input is valid.
 
     Parameters
     ----------
-    commands: str
-        String input that represents a number
+
 
     Returns
     -------
@@ -204,7 +184,7 @@ def is_valid_numeric(input):
         True if the input is a number is less than 2 decimal places, False if not.
     """
     try:
-        if -2 <= Decimal(input).as_tuple().exponent <= 0:
+        if -2 <= Decimal(number).as_tuple().exponent <= 0:
             return True
         return False
     # If we cant convert to decimal it means it's not a valid input
@@ -212,7 +192,7 @@ def is_valid_numeric(input):
         return False
 
 
-def is_valid_letter(given_argument):
+def is_valid_letter(given_argument: str) -> bool:
     correct_arguments = ['r', 't', 'p', 'i']
     return given_argument in correct_arguments
 
@@ -227,7 +207,7 @@ def get_equation_argument_values():
             "What sort of number is the {} variable? (Please enter i, p, r or t): ".format(variables_number_text[variables_asked]))
 
         while not is_valid_letter(letter):
-        print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
+            print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
             letter = input(
                 "What sort of number is the {} variable? (Please enter i, p, r or t): ".format(variables_number_text[variables_asked]))
 
@@ -235,14 +215,14 @@ def get_equation_argument_values():
             "Please now enter the {} variable: ".format(variables_number_text[variables_asked]))
 
         while not is_valid_numeric(value_of_letter):
-        print(
-            "Please select a correct number with no more than 2 decimal places.\n")
+            print(
+                "Please select a correct number with no more than 2 decimal places.\n")
             value_of_letter = input(
                 "Please now enter the {} variable: ".format(variables_number_text[variables_asked]))
 
-    try:
+        try:
             commands[letter] = int(value_of_letter)
-    except ValueError:
+        except ValueError:
             commands[letter] = float(value_of_letter)
 
         variables_asked += 1
@@ -252,41 +232,12 @@ def get_equation_argument_values():
 
 def main():
 
-    second_variable = input(
-        "Please now enter the second variable: ")
-    # If the user fails to follow the format, we display an error message and try again
-    while not is_valid_numeric(second_variable):
-        print(
-            "Please select a correct number with no more than 2 decimal places.\n")
-        second_variable = input(
-            "Please now enter the second variable: ")
-    # Convert variable into an integer or a float
-    try:
-        commands[second_letter] = int(second_variable)
-    except ValueError:
-        commands[second_letter] = float(second_variable)
+    print("\n")
+    print("Welcome to Funky Finance!")
 
-    # Ask the user for the third letter and variable
-    third_letter = input(
-        "What sort of number is the third variable? (Please enter i, p, r or t): ")
-    while not is_valid_letter(third_letter):
-        print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
-        third_letter = input(
-            "What sort of number is the third variable? (Please enter i, p, r or t): ")
+    commands = get_equation_argument_values()
 
-    third_variable = input(
-        "Please now enter the third variable: ")
-    # If the user fails to follow the format, we display an error message and try again
-    while not is_valid_numeric(third_variable):
-        print(
-            "Please select a correct number with no more than 2 decimal places.\n")
-        third_variable = input(
-            "Please now enter the third variable: ")
-    # Convert variable into an integer or a float
-    try:
-        commands[third_letter] = int(third_variable)
-    except ValueError:
-        commands[third_letter] = float(third_variable)
+    [first_letter, second_letter, third_letter] = commands.keys()
 
     print_result(solve_equation(
         [first_letter, second_letter, third_letter])(**commands))
