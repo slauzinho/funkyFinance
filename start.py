@@ -212,9 +212,9 @@ def is_valid_numeric(input):
         return False
 
 
-def is_valid_letter(input):
+def is_valid_letter(given_argument):
     correct_arguments = ['r', 't', 'p', 'i']
-    return input in correct_arguments
+    return given_argument in correct_arguments
 
 
 def main():
