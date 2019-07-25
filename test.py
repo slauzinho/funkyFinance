@@ -13,6 +13,15 @@ class TestFunkyFinance(unittest.TestCase):
         self.assertEqual(result, "200")
         self.assertNotEqual(result, 200)
 
+        arguments = {
+            "p": 1233.56,
+            "r": 1.87,
+            "t": 4
+        }
+        result = start.solve_for_i(**arguments)
+        self.assertEqual(result, "92.27")
+        self.assertNotEqual(result, 92.27)
+
     def test_it_finds_number_of_years_until_loan_is_paid(self):
         arguments = {
             "p": 2000,
