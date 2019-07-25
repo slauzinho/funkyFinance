@@ -217,41 +217,40 @@ def is_valid_letter(given_argument):
     return given_argument in correct_arguments
 
 
-def main():
+def get_equation_argument_values():
+    variables_number_text = ['first', 'second', 'third']
+    variables_asked = 0
     commands = {}
 
-    print("\n")
-    print("Welcome to Funky Finance!")
+    while variables_asked <= 2:
+        letter = input(
+            "What sort of number is the {} variable? (Please enter i, p, r or t): ".format(variables_number_text[variables_asked]))
 
-    # Ask the user for the first letter and variable
-    first_letter = input(
-        "What sort of number is the first variable? (Please enter i, p, r or t): ")
-    while not is_valid_letter(first_letter):
+        while not is_valid_letter(letter):
         print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
-        first_letter = input(
-            "What sort of number is the first variable? (Please enter i, p, r or t): ")
+            letter = input(
+                "What sort of number is the {} variable? (Please enter i, p, r or t): ".format(variables_number_text[variables_asked]))
 
-    first_variable = input(
-        "Please now enter the first variable: ")
-    # If the user fails to follow the format, we display an error message and try again
-    while not is_valid_numeric(first_variable):
+        value_of_letter = input(
+            "Please now enter the {} variable: ".format(variables_number_text[variables_asked]))
+
+        while not is_valid_numeric(value_of_letter):
         print(
             "Please select a correct number with no more than 2 decimal places.\n")
-        first_variable = input(
-            "Please now enter the first variable: ")
-    # Convert variable into an integer or a float
-    try:
-        commands[first_letter] = int(first_variable)
-    except ValueError:
-        commands[first_letter] = float(first_variable)
+            value_of_letter = input(
+                "Please now enter the {} variable: ".format(variables_number_text[variables_asked]))
 
-    # Ask the user for the second letter and variable
-    second_letter = input(
-        "What sort of number is the second variable? (Please enter i, p, r or t): ")
-    while not is_valid_letter(second_letter):
-        print("Incorrect variable provided, please enter (Please enter i, p, r or t)")
-        second_letter = input(
-            "What sort of number is the second variable? (Please enter i, p, r or t): ")
+    try:
+            commands[letter] = int(value_of_letter)
+    except ValueError:
+            commands[letter] = float(value_of_letter)
+
+        variables_asked += 1
+
+    return commands
+
+
+def main():
 
     second_variable = input(
         "Please now enter the second variable: ")
