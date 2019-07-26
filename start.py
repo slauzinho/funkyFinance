@@ -142,34 +142,35 @@ def solve_for_t(p: float, r: float, i: float) -> str:
     return convert_decimal_into_string(result)
 
 
-def solve_equation(commands: List[str]) -> Callable[[float, float, float], str]:
-    """Function that takes a list of commands and returns the correct solving function
-    that maps to those arguments.
+def solve_equation(provided_variables: List[str]) -> Callable[[float, float, float], str]:
+    """Function that takes the variables provided by the user and
+    returns the correct solving function that maps to those arguments.
 
     Parameters
     ----------
-    commands:
+    provided_variables:
         List of characters provided by the user.
 
     Returns
     -------
         The corresponding solving function.
     """
-    available_commands = ['i', 'r', 't', 'p']
+    equation_variables = ['i', 'r', 't', 'p']
 
     # get the missing argument
-    my_command = list(set(available_commands) - set(commands))[0]
+    missing_variable_from_eq = list(
+        set(equation_variables) - set(provided_variables))[0]
 
-    if my_command == 'i':
+    if missing_variable_from_eq == 'i':
         return solve_for_i
 
-    if my_command == 'p':
+    if missing_variable_from_eq == 'p':
         return solve_for_p
 
-    if my_command == 'r':
+    if missing_variable_from_eq == 'r':
         return solve_for_r
 
-    if my_command == 't':
+    if missing_variable_from_eq == 't':
         return solve_for_t
 
 
